@@ -1,0 +1,17 @@
+version: '3'
+
+volumes:
+  experiment-data:
+    driver: local-persist
+    driver_opts:
+      mountpoint: /home/faculty/CS300-Data/ABE-in
+
+services:  
+  abe-in-pos:
+    build: .
+    image: abe-in-pos
+    volumes:
+      - experiment-data:/code/data
+    network_mode: host
+    entrypoint: /bin/sh
+    tty: true
