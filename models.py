@@ -45,7 +45,7 @@ def key_generation_test(num_threads, num_users, file_size, policy_size, num_attr
             'attributes': user_meta['attributes'][2:]
         }
         start = time.time()
-        result = requests.post('{}/user'.format(il_url),
+        result = requests.post('{}/user'.format(il_upstream_url),
                             json=user_object,
                             headers=headers,
                             auth=auth)
@@ -109,7 +109,7 @@ def save_encounter_test(num_threads, num_users, file_size, policy_size, num_attr
         encounter['policy'] = user['policy']
         encounter['user_id'] = user['user_id']
         start = time.time()
-        response = requests.post('{}/encounters/'.format(il_url), json=encounter, headers=headers, auth=auth)
+        response = requests.post('{}/encounters/'.format(il_upstream_url), json=encounter, headers=headers, auth=auth)
         end = time.time()
         print(response.status_code)
         transaction_time = end - start
@@ -162,7 +162,7 @@ def query_encounter_test(num_threads, num_users, file_size, policy_size, num_att
             'private_key': user['private_key']
         }
         start = time.time()
-        response = requests.post('{}/encounters/{}'.format(il_url, encounter_id), headers=headers, auth=auth, json=payload)
+        response = requests.post('{}/encounters/{}'.format(il_upstream_url, encounter_id), headers=headers, auth=auth, json=payload)
         end = time.time()
         print(response.status_code)
         transaction_time = end - start
