@@ -38,16 +38,6 @@ with open(input_path) as input_file:
 transaction_times = []
 status_codes = []
 
-    def query(encounter_id, user):
-        start = time.time()
-        response = requests.post('{}/encounters/{}'.format(il_url, encounter_id), headers=headers, auth=auth, json=payload)
-        end = time.time()
-        print(response.status_code)
-        transaction_time = end - start
-        transaction_times.append(transaction_time)
-        encounters.append(response.json())
-
-
 def query(encounter_id, user): 
     payload = {
         'private_key': user['private_key']
