@@ -1,3 +1,5 @@
+# USAGE:
+# docker exec abeinpos_abe-in-pos_1 python3 key_generation_test.py <policy_size> <num_attributes> <num_txns>_encounters.json
 import sys
 import os
 import time

@@ -49,7 +49,8 @@ def query(encounter_id, user):
                             json=payload,
                             verify=False)
     end = time.time()
-    print(response.status_code) 
+    print(response.status_code)
+    #print(response.json()) 
     status_codes.append(response.status_code)
     transaction_time = end - start
     transaction_times.append(transaction_time)
