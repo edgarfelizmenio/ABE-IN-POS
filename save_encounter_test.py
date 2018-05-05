@@ -42,9 +42,9 @@ status_codes = []
 encounter_ids = []
 
 def save(encounter, user): 
-    encounter['policy'] = user['policy']
-    encounter['user_id'] = user['user_id']    
     start = time.time()
+    encounter['policy'] = user['policy']
+    encounter['user_id'] = user['user_id']
     response = requests.post('{}/encounters/'.format(il_upstream_url),
                             json=encounter, 
                             headers=headers, 
