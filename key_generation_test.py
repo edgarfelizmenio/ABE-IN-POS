@@ -44,6 +44,7 @@ users = []
 error_count = 0
 
 def save_user(user_meta, retry=False):
+    global error_count
     user_object = {
         'first_name': user_meta['attributes'][0],
         'last_name': user_meta['attributes'][1],

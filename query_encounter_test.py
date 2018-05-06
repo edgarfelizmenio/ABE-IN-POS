@@ -39,6 +39,7 @@ status_codes = []
 error_count = 0
 
 def query(encounter_id, user, retry=False): 
+    global error_count
     start = time.time()
     payload = {
         'private_key': user['private_key']

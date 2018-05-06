@@ -45,7 +45,8 @@ status_codes = []
 encounter_ids = []
 error_count = 0
 
-def save(encounter, user, retry=False): 
+def save(encounter, user, retry=False):
+    global error_count
     start = time.time()
     encounter['policy'] = user['policy']
     encounter['user_id'] = user['user_id']
