@@ -76,7 +76,7 @@ with warnings.catch_warnings():
             encounter = random.choice(encounters)
             encounter_id = encounter['encounter_id']
             user = encounter['user']
-            query(encounter_id, user)
+            query(encounter_id, user, True)
             retries -= 1
     test_end_date = datetime.datetime.utcnow()
 
