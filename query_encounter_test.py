@@ -52,6 +52,7 @@ def query(encounter_id, user, retry=False):
                             verify=False)
     end = time.time()
     transaction_time = end - start
+    print(response.status_code) 
 
     if response.status_code == 200:
         transaction_times_success.append(transaction_time)
