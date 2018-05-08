@@ -70,15 +70,6 @@ with warnings.catch_warnings():
         encounter_id = encounter['encounter_id']
         user = encounter['user']
         query(encounter_id, user)
-    while error_count > 0:
-        retries = error_count
-        error_count = 0
-        while retries > 0:
-            encounter = random.choice(encounters)
-            encounter_id = encounter['encounter_id']
-            user = encounter['user']
-            query(encounter_id, user, True)
-            retries -= 1
     test_end_date = datetime.datetime.utcnow()
 
 print("number of encounters: {}".format(len(encounters)))
@@ -89,21 +80,13 @@ with open(transaction_summary_path, "w") as transaction_summary_file:
     avg_txn_time = total_time/float(num_transactions)
     rate = 1/avg_txn_time
 
-    total_time_success = sum(transaction_times_success)
-    avg_txn_time_success = total_time_success/float(num_transactions)
-    rate_success = 1/avg_txn_time_success
-
     successful_transactions = reduce(lambda a,b: a + b, map(lambda x: 1 if x == 200 else 0, status_codes))
     transaction_summary_file.write('Test start: {}\n'.format(test_start_date))
     transaction_summary_file.write('Test end: {}\n'.format(test_end_date))
     transaction_summary_file.write('Total number of transactions: {}\n'.format(num_transactions))
     transaction_summary_file.write('Total time: {}\n'.format(total_time))
     transaction_summary_file.write('Average transaction time: {}\n'.format(avg_txn_time))
-    transaction_summary_file.write('Average transaction time (success): {}\n'.format(avg_txn_time_success))
     transaction_summary_file.write('Transactions per second: {}\n'.format(rate))
-    transaction_summary_file.write('Transactions per second (success): {}\n'.format(rate_success))
     transaction_summary_file.write('Successful transactions: {}\n'.format(successful_transactions))
     transaction_summary_file.write('\n')
     transaction_summary_file.writelines(["{}, {}\n".format(status_code, txn_time) for txn_time, status_code in zip(transaction_times, status_codes)])
-    transaction_summary_file.write('\n')
-    transaction_summary_file.writelines(["{}, {}\n".format(200, txn_time) for txn_time in transaction_times_success])
