@@ -46,9 +46,7 @@ error_count = 0
 def save_user(user_meta, retry=False):
     global error_count
     user_object = {
-        'first_name': user_meta['attributes'][0],
-        'last_name': user_meta['attributes'][1],
-        'attributes': user_meta['attributes'][2:]
+        'attributes': user_meta['attributes']
     }
     start = time.time()
     result = requests.post('{}/user'.format(il_upstream_url),
